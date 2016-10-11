@@ -5,28 +5,38 @@
     height: 400px;
     width: 300px;
     background-color: black;
+    border-radius: 5px;
 }
 .rowDisplay{
     height: 20%;
 
 }
 #display{
-    height: 100%;
+    height: 90%;
     background-color: #3498db;
-    margin-top: 3%;
+    margin-top: 5%;
     margin-bottom: 3%;
+    border-radius: 5px;
 }
-.row{
-    color: white;
-    text-align: center;
+.rowButton{
+    height: 80%;
 }
-.buttonRow .row{
-    padding-top: 5%;
-    padding-bottom: 5%;
+.buttons{
+    margin-top: 3%;
+    margin-bottom: 5%;
 }
-button{
+.inner{/*inner button row to give space for plus button*/
+    margin-bottom: 6%;
 }
-#plus{
-    padding-top:50%;
-    padding-bottom:50%;
+#buttonArea{
+    height: 90%;
+    background-color: ;
+}
+#buttonPlus{
+    padding-top: 14%;
+    padding-bottom: 14%;
+}
+.btn{/*overrides bs button padding*/
+    padding-top:  11px;
+    padding-bottom:11px;
 }
