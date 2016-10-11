@@ -2,8 +2,8 @@
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    height: 70vh;
-    width: 35vw;
+    height: 60vh;
+    width: 23vw;
     background-color: black;
     border-radius: 5px;
 }
@@ -39,9 +39,15 @@
     padding-top:  11px;
     padding-bottom:11px;
 }
-@media screen and (max-width: 540px){
+@media screen and (max-width: 600px){
     #calculator{
-        height: 70vh;
-        width: 70vw;
+        height: 60vh;
+        width: 80vw;
+    }
+}
+@media screen and (min-width: 601px) and (max-width: 1300px){
+    #calculator{
+        height: 42vh;
+        width: 32vw;
     }
 }
