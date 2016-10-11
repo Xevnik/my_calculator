@@ -2,8 +2,8 @@
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    height: 400px;
-    width: 300px;
+    height: 70vh;
+    width: 35vw;
     background-color: black;
     border-radius: 5px;
 }
@@ -30,7 +30,6 @@
 }
 #buttonArea{
     height: 90%;
-    background-color: ;
 }
 #buttonPlus{
     padding-top: 14%;
@@ -39,4 +38,10 @@
 .btn{/*overrides bs button padding*/
     padding-top:  11px;
     padding-bottom:11px;
+}
+@media screen and (max-width: 540px){
+    #calculator{
+        height: 70vh;
+        width: 70vw;
+    }
 }
