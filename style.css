@@ -21,7 +21,7 @@ div#numDisplayArea{
     top: 5%;
     left: 5%;
 }
-div#operatorDisplayArea{
+div#calculatedDisplayArea{
     position: absolute;
     height:45%;
     width:100%;
