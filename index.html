@@ -19,24 +19,20 @@
     </div>
     <div id="calculator">
         <div class="col-xs-10 col-xs-offset-1" id="display">
-            <!--items to be display-->
+            <div id="numDisplayArea"><!--Displays # entered--></div>
+            <div id="operatorDisplayArea"><!--Displays operator pressed--></div>
         </div>
         <div class="col-xs-10 col-xs-offset-1" id="buttonArea">
-            <div class="col-xs-9">
-                <div class="row" id="clearButtons">
-                    <button class="col-xs-5 btn btn-danger">C</button>
-                    <button class="col-xs-5 col-xs-offset-2 btn btn-danger">CE</button>
-                </div>
-                <div class="row" id="operands">
-                    <div class="col-xs-4">
-                        <button class="col-xs-10 btn btn-default">7</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button class="col-xs-offset-1 col-xs-10 btn btn-default">8</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button class="col-xs-offset-1 col-xs-10 btn btn-default">9</button>
-                    </div>
+            <div id="clearButtonsRow">
+                <button class="col-xs-4 btn btn-danger">C</button>
+                <button class="col-xs-4 col-xs-offset-1 btn btn-danger">AC</button>
+                <button class="col-xs-3 btn btn-info">/</button>
+            </div>
+            <div id="operandsAndOperators">
+                <div class="col-xs-9" id="operands">
+                    <button class="col-xs-4 btn btn-default">7</button>
+                    <button class="col-xs-4 btn btn-default">8</button>
+                    <button class="col-xs-4 btn btn-default">9</button>
                     <button class="col-xs-4 btn btn-default">4</button>
                     <button class="col-xs-4 btn btn-default">5</button>
                     <button class="col-xs-4 btn btn-default">6</button>
@@ -47,15 +43,14 @@
                     <button class="col-xs-4 btn btn-default">.</button>
                     <button class="col-xs-4 btn btn-success">=</button>
                 </div>
-            </div>
-            <div class="col-xs-3">
-                <div class="row operators">
-                    <button class="col-xs-12 btn btn-info">/</button>
-                    <button class="col-xs-12 btn btn-info">x</button>
-                    <button class="col-xs-12 btn btn-info">-</button>
-                </div>
-                <div class="row operators" id="plusButton">
-                    <button class="col-xs-12 btn btn-info" id="buttonPlus">+</button>
+                <div class="col-xs-3" id="operators">
+                    <div class="row operators">
+                        <button class="col-xs-12 btn btn-info">x</button>
+                        <button class="col-xs-12 btn btn-info">-</button>
+                    </div>
+                    <div class="row operators" id="plusButtonRow">
+                        <button class="col-xs-12 btn btn-info" id="buttonPlus">+</button>
+                    </div>
                 </div>
             </div>
         </div>

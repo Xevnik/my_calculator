@@ -21,9 +21,9 @@ function getClicked(){
 function displayStuff(type, value, item){
     console.log("In Display stuff");
     if(type === "itemAdded"){
-        $("#display").text(value);
+        $("#numDisplayArea").text(value);
     }else if(type === "calculated"){
-        $("#display").text(value);
+        $("#operatorDisplayArea").text(value);
     }else if(type === "error"){
         $("#display").text(value);
     }else{

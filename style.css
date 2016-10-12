@@ -8,24 +8,54 @@
     border-radius: 5px;
 }
 #display{
+    position: relative;
     height: 20%;
     background-color: #3498db;
     margin-top: 5%;
     border-radius: 5px;
 }
+div#numDisplayArea{
+    position: absolute;
+    height: 45%;
+    width:100%;
+    top: 5%;
+    left: 5%;
+}
+div#operatorDisplayArea{
+    position: absolute;
+    height:45%;
+    width:100%;
+    bottom: -15%;
+    left: 5%;
+}
 #buttonArea{
-    height: 70%;
-    margin-top: 3%;
+    height:65%;
+    margin-top: 5%;
     padding: 0;
 }
-div#clearButtons{
+div#clearButtonsRow{
     height: 20%;
 }
-div#operands{
+#operandsAndOperators{
     height: 80%;
 }
-#plusButton{
-
+#operandsAndOperators button{
+    margin-bottom: 10%;
+}
+#operators button{
+    margin-bottom: 28%;
+}
+div#operands{
+    height: 100%;
+    padding-left: 0;
+}
+#plusButtonRow{
+    height: 40%;
+    vertical-align: center;
+}
+#buttonPlus{
+    padding-top: 49%;
+    padding-bottom: 49%;
 }
 @media screen and (max-width: 600px){
     #calculator{
@@ -35,7 +65,7 @@ div#operands{
 }
 @media screen and (min-width: 601px) and (max-width: 1300px){
     #calculator{
-        height: 42vh;
+        height: 40vh;
         width: 32vw;
     }
 }
