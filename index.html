@@ -18,50 +18,49 @@
         <h1>Calculator</h1>
     </div>
     <div id="calculator">
-        <div class="row rowDisplay">
-            <div class="col-xs-10 col-xs-offset-1" id="display">
+        <div class="col-xs-10 col-xs-offset-1" id="display">
             <!--items to be display-->
-            </div>
         </div>
-        <div class="row rowButton">
-            <div class="col-xs-10 col-xs-offset-1" id="buttonArea">
-                <div class="row buttons">
-                    <div class="col-xs-9">
-                        <button class="col-xs-5 btn btn-danger">C</button>
-                        <button class="col-xs-5 col-xs-offset-2 btn btn-danger">CE</button>
+        <div class="col-xs-10 col-xs-offset-1" id="buttonArea">
+            <div class="col-xs-9">
+                <div class="row" id="clearButtons">
+                    <button class="col-xs-5 btn btn-danger">C</button>
+                    <button class="col-xs-5 col-xs-offset-2 btn btn-danger">CE</button>
+                </div>
+                <div class="row" id="operands">
+                    <div class="col-xs-4">
+                        <button class="col-xs-10 btn btn-default">7</button>
                     </div>
-                    <button class="col-xs-3 btn btn-info">/</button>
-                </div>
-                <div class="row buttons">
-                    <button class="col-xs-3 btn btn-default">7</button>
-                    <button class="col-xs-3 btn btn-default">8</button>
-                    <button class="col-xs-3 btn btn-default">9</button>
-                    <button class="col-xs-3 btn btn-info">x</button>
-                </div>
-                <div class="row buttons">
-                    <button class="col-xs-3 btn btn-default">4</button>
-                    <button class="col-xs-3 btn btn-default">5</button>
-                    <button class="col-xs-3 btn btn-default">6</button>
-                    <button class="col-xs-3 btn btn-info">-</button>
-                </div>
-                <div class="row buttons">
-                    <div class="col-xs-9">
-                        <div class="row inner">
-                            <button class="col-xs-4 btn btn-default">1</button>
-                            <button class="col-xs-4 btn btn-default">2</button>
-                            <button class="col-xs-4 btn btn-default">3</button>
-                        </div>
-                        <div class="row inner">
-                            <button class="col-xs-4 btn btn-default">0</button>
-                            <button class="col-xs-4 btn btn-default">.</button>
-                            <button class="col-xs-4 btn btn-success">=</button>
-                        </div>
+                    <div class="col-xs-4">
+                        <button class="col-xs-offset-1 col-xs-10 btn btn-default">8</button>
                     </div>
-                    <button class="col-xs-3 btn btn-info" id="buttonPlus">+</button>
+                    <div class="col-xs-4">
+                        <button class="col-xs-offset-1 col-xs-10 btn btn-default">9</button>
+                    </div>
+                    <button class="col-xs-4 btn btn-default">4</button>
+                    <button class="col-xs-4 btn btn-default">5</button>
+                    <button class="col-xs-4 btn btn-default">6</button>
+                    <button class="col-xs-4 btn btn-default">1</button>
+                    <button class="col-xs-4 btn btn-default">2</button>
+                    <button class="col-xs-4 btn btn-default">3</button>
+                    <button class="col-xs-4 btn btn-default">0</button>
+                    <button class="col-xs-4 btn btn-default">.</button>
+                    <button class="col-xs-4 btn btn-success">=</button>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="row operators">
+                    <button class="col-xs-12 btn btn-info">/</button>
+                    <button class="col-xs-12 btn btn-info">x</button>
+                    <button class="col-xs-12 btn btn-info">-</button>
+                </div>
+                <div class="row operators" id="plusButton">
+                    <button class="col-xs-12 btn btn-info" id="buttonPlus">+</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
