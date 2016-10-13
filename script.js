@@ -2,11 +2,12 @@
  * Created by Kevin Chau on 10/11/16.
  */
 //Global Variables
-var myNumberObj = {
-     type: undefined,
-    value: [''],
-};
+var myNumberArray = [{
+    type: undefined,
+    value: '',
+}];
 var place = 0;
+
 $(document).ready(clickHandlers);
 
 function clickHandlers(){
@@ -25,7 +26,7 @@ function getClicked(){
             break;
         case 'CE':
             console.log("Clearing Entry!");
-            clear();
+            clearEntry();
             break;
         default:
             addItem(val);
@@ -33,28 +34,18 @@ function getClicked(){
 }
 
 function displayStuff(){
-    console.log("Displaying goods.");
-    // if(type === "itemAdded"){
-    //     $("#numDisplayArea").text(value);
-    // }else if(type === "calculated"){
-    //     $("#operatorDisplayArea").text("="+value);
-    // }else if(type === "error"){
-    //     $("#display").text(value);
-    // }else if(type === 'AC'){
-    //     $("#numDisplayArea").text("");
-    //     $("#operatorDisplayArea").text("");
-    // }
-    switch(myNumberObj.type){
+    switch(myNumberArray[place].type){
         case 'C':
             $("#numDisplayArea, #calculatedDisplayArea").text("");
             break;
         case 'number':
         case 'operator':
-            $("#numDisplayArea").text(myNumberObj.value[place]);
-            console.log(myNumberObj);
+            console.log("Displaying goods.");
+            $("#numDisplayArea").text(myNumberArray[place].value);
+            console.log(myNumberArray);
             break;
         case 'calculated':
-            $("#calculatedDisplayArea").text("=" + myNumberObj.value[place]);
+            $("#calculatedDisplayArea").text("=" + myNumberArray[place].value);
             break;
     }
 }
@@ -66,25 +57,30 @@ function addItem(stringVal){
         operatorOrEqualSign(stringVal);
     }else{
         console.log("It's a number/first decimal!");
-        if(stringVal === '.' &&  (myNumberObj.value[place].indexOf('.') !== -1)){//decimal already present
-           console.log("I've had it with these **** decimals in this **** number!");
+        if(stringVal === '.' &&  (myNumberArray[place].value.indexOf('.') !== -1)){//decimal already present
+            console.log("I've had it with these **** decimals in this **** number!");
             return;
         }
-        myNumberObj.type = 'number';
-        myNumberObj.value[place] += stringVal;
+        myNumberArray[place].type = 'number';
+        myNumberArray[place].value += stringVal;
         displayStuff();
     }
 }
 
 function operatorOrEqualSign(stringVal){
-    if(stringVal !== '='){
+    //create new object in next index slot
+    myNumberArray[++place] = {};
+    myNumberArray[place].value = stringVal;
+    if(stringVal !== '='){//operator has been received.
         console.log("It's not '='!");
-        myNumberObj.value[++place] = stringVal;
+        myNumberArray[place].type = 'operator';
         displayStuff();
-        myNumberObj.type = 'operator';
-        myNumberObj.value[++place] = '';
+        //operator entered. increment index and prep for next number
+        place++;
+        prepNewObj();
     }else{//stringVal is '='
-        console.log("Preparing to do math");
+        myNumberArray[place].type = 'equalSign';
+        console.log("Preparing to do math", myNumberArray);
         doMath();
     }
 }
@@ -94,13 +90,27 @@ function doMath(){
     //TODO Do math
 }
 
+//reset all globals and prep obj
 function allClear(){
     console.log("In all clear function");
+    myNumberArray = [];
+    place = 0;
+    prepNewObj();
+    //todo AllClear needs to display blank display
+    displayStuff();
 }
 
-function clear(){
+function clearEntry(){
     console.log("In Clear function. Remove last item");
-    myNumberObj.value.pop();
-    myNumberObj.value[place] = '';
+    myNumberArray.pop();
+    prepNewObj();
+    //todo Clear current entry and display last entry
     displayStuff()
+}
+
+//creates new obj in the current array index
+//prep value property with empty for concatenating number
+function prepNewObj(){
+    myNumberArray[place] = {};
+    myNumberArray[place].value = '';
 }
