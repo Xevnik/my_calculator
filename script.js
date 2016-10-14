@@ -18,7 +18,7 @@ function clickHandlers(){
 function getClicked(){
     //console.log("In getClicked");
     var val = $(this).text();
-    console.log("button clicked: ", val);
+    //console.log("button clicked: ", val);
     switch(val){
         case 'C':
             console.log("All clearing!");
@@ -33,37 +33,36 @@ function getClicked(){
     }
 }
 
-function displayStuff(){
-    switch(myNumberArray[place].type){
+function displayStuff(obj){
+    switch(obj.type){
         case 'C':
             $("#numDisplayArea, #calculatedDisplayArea").text("");
             break;
         case 'number':
         case 'operator':
             console.log("Displaying goods.");
-            $("#numDisplayArea").text(myNumberArray[place].value);
-            console.log(myNumberArray);
+            $("#numDisplayArea").text(obj.value);
             break;
         case 'calculated':
-            $("#calculatedDisplayArea").text("=" + myNumberArray[place].value);
+            $("#calculatedDisplayArea").text("= " + obj.value);
             break;
     }
 }
 
 function addItem(stringVal){
-    console.log("in addItem. Value passed: ", stringVal, typeof stringVal);
+    //console.log("in addItem. Value passed: ", stringVal, typeof stringVal);
     if(isNaN(parseFloat(stringVal)) && stringVal !== '.'){
-        console.log("Operator or Equal sign entered");
+        //console.log("Operator or Equal sign entered");
         operatorOrEqualSign(stringVal);
     }else{
-        console.log("It's a number/first decimal!");
+        //console.log("It's a number/first decimal!");
         if(stringVal === '.' &&  (myNumberArray[place].value.indexOf('.') !== -1)){//decimal already present
-            console.log("I've had it with these **** decimals in this **** number!");
+            //console.log("I've had it with these **** decimals in this **** number!");
             return;
         }
         myNumberArray[place].type = 'number';
         myNumberArray[place].value += stringVal;
-        displayStuff();
+        displayStuff(myNumberArray[place]);
     }
 }
 
@@ -72,40 +71,102 @@ function operatorOrEqualSign(stringVal){
     myNumberArray[++place] = {};
     myNumberArray[place].value = stringVal;
     if(stringVal !== '='){//operator has been received.
-        console.log("It's not '='!");
+        //console.log("It's not '='!");
         myNumberArray[place].type = 'operator';
-        displayStuff();
+        displayStuff(myNumberArray[place]);
         //operator entered. increment index and prep for next number
         place++;
         prepNewObj();
     }else{//stringVal is '='
         myNumberArray[place].type = 'equalSign';
         console.log("Preparing to do math", myNumberArray);
-        doMath();
+        displayStuff(orderOfOperation(stringToFloat(myNumberArray)));
     }
 }
 
-function doMath(){
+//Walks through given array parsing for '*' and '/', followed by '+' and '-'
+//calls doMath and receiving the result
+//calls displayStuff to display total when done.
+function orderOfOperation(array){
+    var result = null;
+    //do multiplication and division first
+    for(var i = 0; i < array.length; i++){
+        //look for operators in the array
+        //console.log('Array before checking operators: ', array[i], i);
+        if(array[i].type == 'operator'){
+            //Look for multiplication and division
+            if(array[i].value == 'x' || array[i].value == '/'){
+                //grab value starting one index before operator though value one index after operator
+                result = doMath(
+                    array[i-1].value, //first num
+                    array[i+1].value, //second num
+                    array[i].value // '*' or '/' operator
+                );
+                //overwrite value with new ones to maintain length
+                array[i-1].value = 0;
+                array[i].value = '+';
+                array[i+1].value = result;
+            }
+        }
+    }
+
+    console.log("Multiplication/Division done. ", array);
+    for(var j = 0; j < array.length; j++){
+        if(array[j].type === 'operator'){
+             array[0].value = doMath(
+                array[0].value, //first num
+                array[j+1].value, //second num
+                array[j].value // '+' or '-' operator
+            );
+        }
+    }
+    array[place].type = 'calculated';
+    array[place].value = array[0].value
+    return array[place];
+}
+
+//take 3 parameters: 2 numbers and 1 operator
+//return result of operation
+function doMath(num1, num2, operator){
     console.log("Math Hamsters are at work");
-    //TODO Do math
+    //convert string to floats
+    var result = null;
+    switch(operator){
+        case 'x':
+            result = num1 * num2;
+            return result;
+        case '/':
+            if(num2 == 0){
+                return 'error';
+            }else{
+                result = num1 / num2;
+            }
+            return result;
+        case '+':
+            result = num1 + num2;
+            return result;
+        case '-':
+            result = num1 - num2;
+            return result;
+    }
 }
 
 //reset all globals and prep obj
 function allClear(){
     console.log("In all clear function");
+    var clearAllFlag = {type: 'C'};
     myNumberArray = [];
     place = 0;
     prepNewObj();
-    //todo AllClear needs to display blank display
-    displayStuff();
+    displayStuff(clearAllFlag);
 }
 
 function clearEntry(){
     console.log("In Clear function. Remove last item");
     myNumberArray.pop();
     prepNewObj();
-    //todo Clear current entry and display last entry
-    displayStuff()
+    place--;
+    displayStuff(myNumberArray[place]);
 }
 
 //creates new obj in the current array index
@@ -113,4 +174,15 @@ function clearEntry(){
 function prepNewObj(){
     myNumberArray[place] = {};
     myNumberArray[place].value = '';
+}
+
+//Loops through array of objects looking for type 'number' and converting to floats
+function stringToFloat(array){
+    for(var i = 0; i < array.length; i++){
+        if(array[i].type === 'number'){
+            array[i].value = parseFloat(array[i].value);
+        }
+    }
+    console.log('String to Float: ', array);
+    return array;
 }
