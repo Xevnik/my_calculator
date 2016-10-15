@@ -19,15 +19,15 @@ div#numDisplayArea{
     height: 45%;
     width:100%;
     top: 0;
-    left: 5%;
+    right: 5%;
+    text-align: right;
 }
 div#calculatedDisplayArea{
     position: absolute;
     height:45%;
     width:100%;
     bottom: 0;
-    right: 5%;
-    text-align: right;
+    left: 5%;
 }
 #calculatedDisplayArea, #numDisplayArea{
     font-weight: bolder;

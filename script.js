@@ -67,22 +67,33 @@ function addItem(stringVal){
 }
 
 function operatorOrEqualSign(stringVal){
-    //create new object in next index slot
-    myNumberArray[++place] = {};
-    myNumberArray[place].value = stringVal;
-    if(stringVal !== '='){//operator has been received.
-        //console.log("It's not '='!");
-        myNumberArray[place].type = 'operator';
-        displayStuff(myNumberArray[place]);
-        //operator entered. increment index and prep for next number
-        place++;
-        prepNewObj();
-    }else{//stringVal is '='
-        myNumberArray[place].type = 'equalSign';
-        console.log("Preparing to do math", myNumberArray);
-        displayStuff(orderOfOperation(stringToFloat(myNumberArray)));
-    }
+   if(place > 0){//number has been entered before operator/equal sign press
+
+   }
+    //before increment array and taking operator value check if current index is number
+    //if number proceed else overwrite previous operator
+
+
+    // console.log('Moving on');
+    // //create new object in next index slot
+    // myNumberArray[++place] = {};
+    // myNumberArray[place].value = stringVal;
+    // if(stringVal !== '='){//operator has been received.
+    //     //console.log("It's not '='!");
+    //     myNumberArray[place].type = 'operator';
+    //     displayStuff(myNumberArray[place]);
+    //     //operator entered. increment index and prep for next number
+    //     place++;
+    //     prepNewObj();
+    // }else{//stringVal is '='
+    //     myNumberArray[place].type = 'equalSign';
+    //     console.log("Preparing to do math", myNumberArray);
+    //     displayStuff(orderOfOperation(stringToFloat(myNumberArray)));
+    // }
+
 }
+
+
 
 //Walks through given array parsing for '*' and '/', followed by '+' and '-'
 //calls doMath and receiving the result
@@ -111,17 +122,21 @@ function orderOfOperation(array){
     }
 
     console.log("Multiplication/Division done. ", array);
-    for(var j = 0; j < array.length; j++){
+    for(var j = 0; j < array.length-2; j++){
         if(array[j].type === 'operator'){
-             array[0].value = doMath(
-                array[0].value, //first num
+             result = doMath(
+                array[j-1].value, //first num
                 array[j+1].value, //second num
                 array[j].value // '+' or '-' operator
             );
+            array[j-1].value = 0;
+            array[j].value = '+';
+            array[j+1].value = result;
         }
     }
+    console.log('Math done: ', array);
+    array[place].value = array[j].value;
     array[place].type = 'calculated';
-    array[place].value = array[0].value
     return array[place];
 }
 
