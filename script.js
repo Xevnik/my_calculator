@@ -84,8 +84,10 @@ function operatorOrEqualSign(stringVal){
             console.log("Preparing to do math", myNumberArray);
             displayStuff(orderOfOperation(stringToFloat(myNumberArray)));
         }
+    }else if(myNumberArray[(place-1)].type = 'operator' && stringVal !== '=') {//last input operator
+        console.log("changing the operator");
+        myNumberArray[place - 1].value = stringVal;//replace operator with new operator
     }
-    console.log("After if operator");
 }
 
 
@@ -172,11 +174,11 @@ function allClear(){
 }
 
 function clearEntry(){
-    console.log("In Clear function. Remove last item");
-    myNumberArray.pop();
-    prepNewObj();
-    place--;
-    displayStuff(myNumberArray[place]);
+    console.log("In clear entry. Remove current number");
+    if(myNumberArray[place].type === 'number'){//clear out current number entered
+        myNumberArray[place].value = '';
+        displayStuff(myNumberArray[place]);
+    }
 }
 
 //creates new obj in the current array index
