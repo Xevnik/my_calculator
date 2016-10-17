@@ -89,7 +89,7 @@ function operatorOrEqualSign(stringVal){
 
 //Walks through given array parsing for '*' and '/', followed by '+' and '-'
 //calls doMath and receiving the result
-//calls displayStuff to display total when done.
+//returns an object containing total/result
 function orderOfOperation(array){
     var result = null;
     //do multiplication and division first
@@ -104,6 +104,11 @@ function orderOfOperation(array){
                 array[i + 1].value, //second num
                 array[i].value // '*' or '/' operator
             );
+            //Divided by zero
+            if(result === 'error'){
+                array[0].value = result;
+                return array[0];
+            }
             //overwrite value with new ones to maintain length
             array[i - 1].value = 0;
             array[i].value = '+';
@@ -123,6 +128,7 @@ function orderOfOperation(array){
         array.unshift(simpleMath[0]);
     }
     console.log("Addition/Subtraction done: ", array, ' length: ', array.length);
+    //if end total is a float, limit decimal places
     if(array[0].value % 1 !== 0){
         array[0].value = array[0].value.toFixed(13);
     }
@@ -175,7 +181,7 @@ function doMath(num1, num2, operator){
 
 //reset all globals and prep obj
 function allClear(){
-    console.log("In all clear function");
+    //console.log("In all clear function");
     var clearAllFlag = {type: 'C'};
     myNumberArray = [];
     place = 0;
@@ -184,7 +190,7 @@ function allClear(){
 }
 
 function clearEntry(){
-    console.log("In clear entry. Remove current number");
+    //console.log("In clear entry. Remove current number");
     if(myNumberArray[place].type === 'number'){//clear out current number entered
         myNumberArray[place].value = '';
         displayStuff(myNumberArray[place]);
@@ -205,6 +211,5 @@ function stringToFloat(array){
             array[i].value = parseFloat(array[i].value);
         }
     }
-    console.log('String to Float: ', array);
     return array;
 }
