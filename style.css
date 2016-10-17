@@ -14,22 +14,19 @@
     margin-top: 5%;
     border-radius: 5px;
 }
-div#numDisplayArea{
+div#numDisplayArea {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     position: absolute;
-    height: 45%;
-    width:100%;
-    top: 0;
+    height: 75%;
+    width: 95%;
+    top: 50%;
+    transform: translateY(-50%);
     right: 5%;
-    text-align: right;
 }
-div#calculatedDisplayArea{
-    position: absolute;
-    height:45%;
-    width:100%;
-    bottom: 0;
-    left: 5%;
-}
-#calculatedDisplayArea, #numDisplayArea{
+
+#numDisplayArea{
     font-weight: bolder;
     font-size: 200%;
 }

@@ -36,15 +36,11 @@ function getClicked(){
 function displayStuff(obj){
     switch(obj.type){
         case 'C':
-            $("#numDisplayArea, #calculatedDisplayArea").text("");
+            $("#numDisplayArea").text('');
             break;
         case 'number':
         case 'operator':
-            console.log("Displaying goods.");
             $("#numDisplayArea").text(obj.value);
-            break;
-        case 'calculated':
-            $("#calculatedDisplayArea").text("= " + obj.value);
             break;
     }
 }
@@ -68,7 +64,6 @@ function addItem(stringVal){
 
 function operatorOrEqualSign(stringVal){
     if(myNumberArray[place].type === 'number'){//current index is number or number was last inputted
-        console.log("Make way for operator/equal sign");
         place++;//move to next index to add operator or equal sign;
         prepNewObj();
         myNumberArray[place].value = stringVal;
@@ -101,40 +96,55 @@ function orderOfOperation(array){
     for(var i = 0; i < array.length; i++){
         //look for operators in the array
         //console.log('Array before checking operators: ', array[i], i);
-        if(array[i].type == 'operator'){
-            //Look for multiplication and division
-            if(array[i].value == 'x' || array[i].value == '/'){
-                //grab value starting one index before operator though value one index after operator
-                result = doMath(
-                    array[i-1].value, //first num
-                    array[i+1].value, //second num
-                    array[i].value // '*' or '/' operator
-                );
-                //overwrite value with new ones to maintain length
-                array[i-1].value = 0;
-                array[i].value = '+';
-                array[i+1].value = result;
-            }
+        //Look for multiplication and division
+        if (array[i].value == 'x' || array[i].value == '/') {
+            //grab value starting one index before operator though value one index after operator
+            result = doMath(
+                array[i - 1].value, //first num
+                array[i + 1].value, //second num
+                array[i].value // '*' or '/' operator
+            );
+            //overwrite value with new ones to maintain length
+            array[i - 1].value = 0;
+            array[i].value = '+';
+            array[i + 1].value = result;
         }
+    }
+    console.log("Multiplication/Division done. ", array);
+
+    while(array.length > 2){
+        var simpleMath = array.splice(0,3);
+        //maintain the array of object format
+        simpleMath[0].value = doMath(
+            simpleMath[0].value,
+            simpleMath[2].value,
+            simpleMath[1].value
+        );
+        array.unshift(simpleMath[0]);
+    }
+    console.log("Addition/Subtraction done: ", array, ' length: ', array.length);
+    if(array[0].value % 1 !== 0){
+        array[0].value = array[0].value.toFixed(13);
     }
 
-    console.log("Multiplication/Division done. ", array);
-    for(var j = 0; j < array.length-2; j++){
-        if(array[j].type === 'operator'){
-            result = doMath(
-                array[j-1].value, //first num
-                array[j+1].value, //second num
-                array[j].value // '+' or '-' operator
-            );
-            array[j-1].value = 0;
-            array[j].value = '+';
-            array[j+1].value = result;
-        }
-    }
-    console.log('Math done: ', array);
-    array[place].value = array[j].value;
-    array[place].type = 'calculated';
-    return array[place];
+    return array[0];
+    //previous working addition/subtraction
+    // for(var j = 0; j < array.length-2; j++){
+    //     if(array[j].type === 'operator'){
+    //         result = doMath(
+    //             array[j-1].value, //first num
+    //             array[j+1].value, //second num
+    //             array[j].value // '+' or '-' operator
+    //         );
+    //         array[j-1].value = 0;
+    //         array[j].value = '+';
+    //         array[j+1].value = result;
+    //     }
+    // }
+    // console.log('Math done: ', array);
+    // array[place].value = array[j].value;
+    // array[place].type = 'calculated';
+    // return array[place];
 }
 
 //take 3 parameters: 2 numbers and 1 operator
