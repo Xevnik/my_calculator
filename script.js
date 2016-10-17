@@ -90,7 +90,7 @@ function operatorOrEqualSign(stringVal){
         myNumberArray.pop();
         myNumberArray = myNumberArray.concat(lastOperation);
         displayStuff(orderOfOperation(stringToFloat(myNumberArray)));
-    }
+    }//todo operation rollover
 }
 
 
