@@ -7,6 +7,7 @@ var myNumberArray = [{
     value: '',
 }];
 var place = 0;
+var lastOperation;
 
 $(document).ready(clickHandlers);
 
@@ -63,6 +64,7 @@ function addItem(stringVal){
 }
 
 function operatorOrEqualSign(stringVal){
+    console.log('Current index: ', place);
     if(myNumberArray[place].type === 'number'){//current index is number or number was last inputted
         place++;//move to next index to add operator or equal sign;
         prepNewObj();
@@ -76,12 +78,18 @@ function operatorOrEqualSign(stringVal){
             prepNewObj();
         }else{//stringVal is '='
             myNumberArray[place].type = 'equalSign';
+            lastOperation = myNumberArray.slice(place-2);//saves last operation for operation repeat
+            console.log('Last operator: ', lastOperation);
             console.log("Preparing to do math", myNumberArray);
             displayStuff(orderOfOperation(stringToFloat(myNumberArray)));
         }
-    }else if(myNumberArray[(place-1)].type = 'operator' && stringVal !== '=') {//last input operator
+    }else if(myNumberArray[(place-1)].type === 'operator' && stringVal !== '=') {//last input operator
         console.log("changing the operator");
         myNumberArray[place - 1].value = stringVal;//replace operator with new operator
+    }else if(myNumberArray[place].type === 'equalSign'){//equal is entered after equal already entered. Do operation repeat
+        myNumberArray.pop();
+        myNumberArray = myNumberArray.concat(lastOperation);
+        displayStuff(orderOfOperation(stringToFloat(myNumberArray)));
     }
 }
 
@@ -132,7 +140,8 @@ function orderOfOperation(array){
     if(array[0].value % 1 !== 0){
         array[0].value = array[0].value.toFixed(13);
     }
-
+    //reset place index after shortening of array
+    place = array.length-1;
     return array[0];
     //previous working addition/subtraction
     // for(var j = 0; j < array.length-2; j++){
