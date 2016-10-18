@@ -50,6 +50,7 @@ function addItem(stringVal){
     //console.log("in addItem. Value passed: ", stringVal, typeof stringVal);
     if(isNaN(parseFloat(stringVal)) && stringVal !== '.'){
         //console.log("Operator or Equal sign entered");
+        console.log('before going into operator', myNumberArray);
         operatorOrEqualSign(stringVal);
     }else{
         //console.log("It's a number/first decimal!");
@@ -64,7 +65,8 @@ function addItem(stringVal){
 }
 
 function operatorOrEqualSign(stringVal){
-    console.log('Current index: ', place);
+    //todo break down into smaller functions
+    console.log('Current index: ', place, myNumberArray);
     if(myNumberArray[place].type === 'number'){//current index is number or number was last inputted
         place++;//move to next index to add operator or equal sign;
         prepNewObj();
@@ -90,7 +92,18 @@ function operatorOrEqualSign(stringVal){
         myNumberArray.pop();
         myNumberArray = myNumberArray.concat(lastOperation);
         displayStuff(orderOfOperation(stringToFloat(myNumberArray)));
-    }//todo operation rollover
+    }
+    // else if(myNumberArray[place-1].type === 'operator' && stringVal === '='){
+    //     myNumberArray.pop();
+    //     var previousTotal = myNumberArray.slice(0, place);
+    //     console.log('slice= ', previousTotal);
+    //     myNumberArray = previousTotal.concat(myNumberArray);
+    //     place = myNumberArray.length-1;
+    //     myNumberArray[place].type = 'equalSign';
+    //     myNumberArray[place].value = '=';
+    //     console.log('after concat= ', myNumberArray);
+    //
+    // }
 }
 
 
