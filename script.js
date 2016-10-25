@@ -55,7 +55,6 @@ function addItem(stringVal){
     }else{
         //console.log("It's a number/first decimal!");
         if(stringVal === '.' &&  (myNumberArray[place].value.indexOf('.') !== -1)){//decimal already present
-            //console.log("I've had it with these **** decimals in this **** number!");
             return;
         }
         myNumberArray[place].type = 'number';
@@ -93,17 +92,6 @@ function operatorOrEqualSign(stringVal){
         myNumberArray = myNumberArray.concat(lastOperation);
         displayStuff(orderOfOperation(stringToFloat(myNumberArray)));
     }
-    // else if(myNumberArray[place-1].type === 'operator' && stringVal === '='){
-    //     myNumberArray.pop();
-    //     var previousTotal = myNumberArray.slice(0, place);
-    //     console.log('slice= ', previousTotal);
-    //     myNumberArray = previousTotal.concat(myNumberArray);
-    //     place = myNumberArray.length-1;
-    //     myNumberArray[place].type = 'equalSign';
-    //     myNumberArray[place].value = '=';
-    //     console.log('after concat= ', myNumberArray);
-    //
-    // }
 }
 
 
@@ -156,23 +144,6 @@ function orderOfOperation(array){
     //reset place index after shortening of array
     place = array.length-1;
     return array[0];
-    //previous working addition/subtraction
-    // for(var j = 0; j < array.length-2; j++){
-    //     if(array[j].type === 'operator'){
-    //         result = doMath(
-    //             array[j-1].value, //first num
-    //             array[j+1].value, //second num
-    //             array[j].value // '+' or '-' operator
-    //         );
-    //         array[j-1].value = 0;
-    //         array[j].value = '+';
-    //         array[j+1].value = result;
-    //     }
-    // }
-    // console.log('Math done: ', array);
-    // array[place].value = array[j].value;
-    // array[place].type = 'calculated';
-    // return array[place];
 }
 
 //take 3 parameters: 2 numbers and 1 operator
