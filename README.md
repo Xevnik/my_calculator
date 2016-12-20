@@ -14,3 +14,6 @@ A calculator built to test logic via implementation of different calculator func
 3. HTML5
 4. CSS3
 5. Twitter Bootstrap
+
+#####Feature to Work On
+1. Responsiveness
