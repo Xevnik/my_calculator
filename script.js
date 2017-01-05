@@ -64,7 +64,6 @@ function addItem(stringVal){
 }
 
 function operatorOrEqualSign(stringVal){
-    //todo break down into smaller functions
     console.log('Current index: ', place, myNumberArray);
     if(myNumberArray[place].type === 'number'){//current index is number or number was last inputted
         place++;//move to next index to add operator or equal sign;

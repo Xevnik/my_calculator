@@ -51,14 +51,14 @@ div#operands{
     height: 100%;
     padding-left: 0;
 }
-#plusButtonRow{
-    height: 40%;
-    vertical-align: center;
-}
-#buttonPlus{
-    padding-top: 49%;
-    padding-bottom: 49%;
-}
+/*#plusButtonRow{*/
+    /*height: 40%;*/
+    /*vertical-align: center;*/
+/*}*/
+/*#buttonPlus{*/
+    /*padding-top: 49%;*/
+    /*padding-bottom: 49%;*/
+/*}*/
 @media screen and (max-width: 600px){
     #calculator{
         height: 60vh;
